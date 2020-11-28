@@ -863,7 +863,16 @@ import obj from 'demo1'
 
 
 
+### this.$route vs this.$router
 
+router是VueRouter的一个对象，通过Vue.use(VueRouter)和VueRouter构造函数得到一个router的实例对象，这个对象中是一个全局的对象，他包含了所有的路由包含了许多关键的对象和属性。
+
+```
+$router.push({path:'home'});本质是向history栈中添加一个路由，在我们看来是 切换路由，但本质是在添加一个history记录
+$router.replace({path:'home'});//替换路由，没有历史记录
+```
+
+route是一个跳转的路由对象，每一个路由都会有一个route对象，是一个局部的对象，可以获取对应的name,path,params,query等
 
 ## 实战
 

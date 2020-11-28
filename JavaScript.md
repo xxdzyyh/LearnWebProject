@@ -124,7 +124,23 @@ var person = null;           // 值为 null(空), 但类型为对象
 var person = undefined;      // 值为 undefined, 类型为 undefined
 ```
 
+判断是不是 undefined
 
+```
+let params = this.$route.params.params
+if (typeof(params) == "undefined") {
+    params = localStorage.getItem("netdetail")
+}
+```
+
+判断 null
+
+```
+var exp = null; 
+if (!exp && typeof(exp)!=”undefined” && exp!=0) { 
+	alert(“is null”); 
+}　
+```
 
 ### 向未声明的 JavaScript 变量分配值
 
