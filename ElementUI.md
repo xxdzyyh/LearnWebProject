@@ -38,6 +38,29 @@
 <el-link type="primary" disabled>主要链接</el-link>
 ```
 
+### el-select
+
+```
+ <el-table-column label="状态">
+  <template slot-scope="scope">
+    <el-select v-model="value" v-on:change="jsErrorStatusChanged($event,scope.row)">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
+  </template>
+</el-table-column>
+
+// 选中的item的值，data：附带的菜蔬
+jsErrorStatusChanged(index,data) {
+  console.log(index)
+  console.log(data)
+}
+```
+
 ### el-table
 
 ```
@@ -153,6 +176,10 @@ export default {
 <style scoped>
 </style>
 ```
+
+
+
+
 
 #### 自定义cell
 

@@ -24,7 +24,7 @@ Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将�
 
 ### v-html 
 
-使用 v-html 指令用于输出 html 代码
+使用 v-html 指令用于输出 html 代码。不使用v-html，对应的字符串会当做普通字符串处理，而不是像html那样加入DOM。
 
 ```
 <div id="app">
@@ -42,7 +42,23 @@ new Vue({
 
 ### v-bind 
 
-关联HTML 属性中的值应使用 v-bind 指令
+关联HTML 属性中的值应使用 v-bind 指令。没使用 v-bind 的时候，对应的属性只接受字符串，不接受表达式，使用 v-bind 后，变成了表达式或者函数，可以动态赋值。
+
+`v-bind` 的缩写为 `:` ，所以看起来有些HTML属性是以`:`开头的，但其实只是`v-bind`的缩写
+
+```
+<el-tooltip placement="right" content="url" popper-class="tips">
+<el-tooltip placement="right" v-bind:content="scope.row.url" popper-class="tips">
+<el-tooltip placement="right" :content="scope.row.url" popper-class="tips">
+```
+
+
+
+`v-bind` 对 class/style做了特殊的处理
+
+// TODO 做了哪些特殊处理
+
+
 
 以下实例判断 use 的值，如果为 true 使用 class1 类的样式，否则不使用该类
 
@@ -57,7 +73,7 @@ new Vue({
     
 <script>
 new Vue({
-    el: '#app',
+  el: '#app',
   data:{
       use: false
   }
@@ -198,6 +214,8 @@ Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：
 ```
 <h1 v-show="ok">Hello!</h1>
 ```
+
+`v-show` 和 `v-if`的区别，`v-show`只是简单的隐藏和显示，`v-if`决定要不要创建、销毁
 
 ### v-for
 
@@ -430,10 +448,6 @@ Vue.component('my-component', {
   }  
 }
 ```
-
-
-
-
 
 
 
@@ -872,11 +886,32 @@ $router.push({path:'home'});本质是向history栈中添加一个路由，在我
 $router.replace({path:'home'});//替换路由，没有历史记录
 ```
 
-route是一个跳转的路由对象，每一个路由都会有一个route对象，是一个局部的对象，可以获取对应的name,path,params,query等
+route是一个跳转的路由对象，每一个路由都会有一个route对象，是一个局部的对象，可以获取对应的name,path,params,query等。
+
+
+
+>  query 会显示在状态栏,刷新后值还在，而 params 不会显示在状态栏，但是刷新后会变成 undefined
+
+```
+// 在query中传递自定义对象，刷新后，对象无法读取,对象变成了 string 类型，内容为 '[object Object]'
+this.$router.push({ name:'detail',query:{query:this.getRequestParams,model:model}})
+
+this.$router.push({ name:'detail',params:{query:this.getRequestParams,model:model}})
+```
+
+解决方法：使用 localStorage 存储 params
+
+```
+created() {
+	localStorage.setItem('tempData',JSON.)
+}
+```
+
+
+
+
 
 ## 实战
-
-
 
 ```
 <template>
