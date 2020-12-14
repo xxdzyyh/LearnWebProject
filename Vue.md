@@ -231,8 +231,6 @@ Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：
 </div>
 ```
 
-
-
 ```
 <div id="app">
   <ol>
@@ -959,8 +957,6 @@ export default {
 
 了解了生命周期，就可以在合适的地方做合适的事情。
 
-
-
 ```
 beforeCreate?(this: V): void;
 created?(): void;
@@ -975,3 +971,28 @@ deactivated?(): void;
 errorCaptured?(err: Error, vm: Vue, info: string): boolean | void;
 serverPrefetch?(this: V): Promise<void>;
 ```
+
+
+
+### nextTick
+
+Vue 实现响应式并**不是数据发生变化之后 DOM 立即变化**，而是按一定的策略进行 DOM 的更新。
+
+简单来说，Vue 在修改数据后，视图不会立刻更新，而是等**同一事件循环**中的所有数据变化完成之后，再统一进行视图更新。同步里执行的方法，每个方法里做的事情组成一个事件循环；接下来再次调用的是另一个事件循环。
+
+this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行。在修改数据之后立即使用它，然后等待 DOM 更新。它跟全局方法 Vue.nextTick 一样，不同的是回调的 this 自动绑定到调用它的实例上。
+
+修改数据后，会触发对象的set方法，会通知watcher，从而触发watcher的update方法，update方法内会将watcher添加进watcher队列，执行nexttick，把清空wacher队列的方法加入到微任务，等待同步事件执行完成后，浏览器就会执行微任务，从而更新dom。
+
+所以何时更新dom就看同步事件何时执行完，定时器是宏任务，每执行完一次定时器都会更新一次DOM
+
+使用JS代码修改DOM后，并不会立即生效，DOM
+
+**需要注意的是，在 created 和 mounted 阶段，如果需要操作渲染后的试图，也要使用 nextTick 方法。**
+
+官方文档说明：mounted 不会承诺所有的子组件也都一起被挂载。如果你希望等到整个视图都渲染完毕，可以用 vm.$nextTick：
+
+
+
+setNeedDisplay在receiver标上一个需要被重新绘图的标记，在下一个draw周期自动重绘。
+

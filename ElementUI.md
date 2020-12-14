@@ -1,16 +1,16 @@
 
 
-| 控件描述 | ElementUI | iOS               |      |
-| -------- | --------- | ----------------- | ---- |
-| 弹窗     | el-dialog | UIAlertController |      |
-| 按钮     | el-button | UIButton          |      |
-|          |           |                   |      |
-|          |           |                   |      |
-|          |           |                   |      |
-|          |           |                   |      |
-|          |           |                   |      |
-|          |           |                   |      |
-|          |           |                   |      |
+| 控件描述 | ElementUI | iOS                    |      |
+| -------- | --------- | ---------------------- | ---- |
+| 弹窗     | el-dialog | UIAlertController      |      |
+| 按钮     | el-button | UIButton               |      |
+| tab      | el-tabs   | UITabbarViewController |      |
+|          |           |                        |      |
+|          |           |                        |      |
+|          |           |                        |      |
+|          |           |                        |      |
+|          |           |                        |      |
+|          |           |                        |      |
 
 
 
